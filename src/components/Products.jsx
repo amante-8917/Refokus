@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Product from "./Product";
+import { motion } from "framer-motion";
+import img1 from "../assets/images/1119724.jpg"
+import img2 from "../assets/images/hero-iron-man-minimalist.jpg"
+import img3 from "../assets/images/Iron Man 3 HD Wallpaper.jpeg"
 
 function Products() {
   var products = [
@@ -32,11 +36,55 @@ function Products() {
       case: false,
     },
   ];
+
+  const [pos, setPos] = useState(0);
+
+  const mover = (val) => {
+    setPos(val * 23);
+  };
+
   return (
-    <div className="mt-32">
-      {products.map((elem,index)=>(
-        <Product val={elem}/>
+    <div className="mt-32 relative">
+      {products.map((elem, index) => (
+        <Product key={index} val={elem} mover={mover} count={index} />
       ))}
+      <div className="absolute top-0 w-full h-full pointer-events-none">
+        <motion.div
+          initial={{ y: pos, x: "-50%" }}
+          animate={{ y: pos + `rem` }}
+          transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.6 }}
+          className="window absolute w-[32rem] h-[23rem] bg-white left-[44%] overflow-hidden"
+        >
+          <motion.div
+            animate={{ y: -pos + `rem` }}
+            transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
+            className="w-full h-full"
+          >
+            <img src={img1} alt=""  className="w-full h-full object-cover"/>
+          </motion.div>
+          <motion.div
+            animate={{ y: -pos + `rem` }}
+            transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
+            className="w-full h-full bg-sky-300"
+          >
+            <img src={img2} alt=""  className="w-full h-full object-cover"/>
+          </motion.div>
+          <motion.div
+            animate={{ y: -pos + `rem` }}
+            transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
+            className="w-full h-full bg-sky-400"
+          >
+            <img src={img3} alt=""  className="w-full h-full object-cover"/>
+          </motion.div>
+          <motion.div
+            animate={{ y: -pos + `rem` }}
+            transition={{ ease: [0.76, 0, 0.24, 1], duration: 0.5 }}
+            className="w-full h-full bg-sky-500"
+          >
+            <img src={img1} alt=""  className="w-full h-full object-cover"/>
+          </motion.div>
+        </motion.div>
+      </div>
     </div>
   );
 }

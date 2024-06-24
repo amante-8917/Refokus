@@ -31,7 +31,7 @@ function Stripes() {
   return (
     <div className='flex items-center mt-32'>
       {data.map((elem,indx)=>(
-        <Strip val={elem}/>
+        <Strip key={indx} val={elem}/>
       ))}
     </div>
   )
